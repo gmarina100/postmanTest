@@ -1,0 +1,314 @@
+{
+	"info": {
+		"_postman_id": "90090c72-9743-440c-b311-cd9d0dc89f40",
+		"name": "ProyectoSegundamano",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "570d2696-6b37-43c2-ad6e-e515aeddf909",
+						"exec": [
+							"pm.test(\"Validates it has a body\", function () { \r     pm.response.to.be.withBody; \r});\r\rpm.test(\"Validates that the body is json\", function () { \r     pm.response.to.be.json; \r});\r\rpm.test(\"Validates created status\", function(){\r    pm.response.to.have.status(201);\r});\r\rpm.test(\"Validates it has the property account_id\", function() {\r    var body = pm.response.json();\r    pm.expect(body.account).to.have.property('account_id');\r});\r\rpm.test(\"Validates name value\", function(){\r    var body = pm.response.json();\r    pm.expect(body.account.name).to.eq(pm.environment.get(\"email\"));\r});\r\r\r\rconsole.log(pm.response);\rconsole.log(pm.response.code);\rconsole.log(pm.response.status);\r\rpm.environment.set('account_id', pm.response.json().account.account_id)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3d418679-4ae6-4e0f-b89e-94272a6dc0cd",
+						"exec": [
+							"function generateRandomString(length) {",
+							"    var chars = 'abcdefghijklmnopqrstuvwxyz1234567890';",
+							"    var string = '';",
+							"    for(var ii=0; ii< length; ii++){",
+							"        string += chars[Math.floor(Math.random() * chars.length)];",
+							"    }",
+							"    return string;",
+							"}",
+							"",
+							"function createRandomUser () {",
+							"    return 'agente' + generateRandomString(7) + '@ventas.com';",
+							"}",
+							"",
+							"function createRandomPassword() {",
+							"    return generateRandomString(7);",
+							"}",
+							"",
+							"function registerAuthVariables(){",
+							"    var user = createRandomUser();",
+							"    var password = createRandomPassword();",
+							"    var authString = user + ':' + password;",
+							"    var encodedAuthString = btoa(authString);",
+							"    console.log('using authString = ' + encodedAuthString);",
+							"    pm.environment.set('authString', encodedAuthString);",
+							"    console.log('using email = ' + user);",
+							"    pm.environment.set('email', user);",
+							"}",
+							"",
+							"registerAuthVariables();",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic {{authString}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"account\": {\n\t\t\"email\": \"{{email}}\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "https://{{base_url}}/nga/api/v1.1/private/accounts?",
+					"protocol": "https",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"nga",
+						"api",
+						"v1.1",
+						"private",
+						"accounts"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post and Ad",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "66d87c72-b8ad-43e4-9959-2da5d0846427",
+						"exec": [
+							"let getTokenRequest = {",
+							"    method: 'POST',",
+							"    url: 'https://webapi.segundamano.mx/nga/api/v1.1/private/accounts',",
+							"    header: {",
+							"            Authorization: 'Basic ' + pm.environment.get('authString')",
+							"    }",
+							"};",
+							"",
+							"pm.sendRequest(getTokenRequest, (err, response) => {",
+							"    var jsonResponse = response.json(),",
+							"        newAccessToken = jsonResponse.access_token;",
+							"    pm.environment.set('accessToken', newAccessToken);",
+							"    pm.variables.set('accessToken', newAccessToken);",
+							"    console.log({ err, response, newAccessToken })",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "b0ef2aab-74dd-40fa-8b56-5d60d5189fc6",
+						"exec": [
+							"var body = pm.response.json();\rconsole.log(pm.response);\rconsole.log(pm.response.code);\rconsole.log(pm.response.status);\r\rpm.test(\"Validates it has a body\", function () { \r     pm.response.to.be.withBody; \r});\r\rpm.test(\"Validates that the body is json\", function () { \r     pm.response.to.be.json; \r});\r\rpm.test(\"Validates created status\", function(){\r    pm.response.to.have.status(201);\r});\r\rpm.test(\"Validates it has the property action_type\", function() {\r    pm.expect(body.action).to.have.property('action_type');\r    pm.expect(body.action.action_type).to.eq('new');\r});\r\rpm.test(\"Validates subject's value\", function(){\r    pm.expect(body.ad.subject).to.eq('Juego de cucharones');\r});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authority",
+						"type": "text",
+						"value": "webapi.segundamano.mx"
+					},
+					{
+						"key": "accept",
+						"type": "text",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "authorization",
+						"type": "text",
+						"value": "tag:scmcoord.com,2013:api {{accessToken}}"
+					},
+					{
+						"key": "x-nga-source",
+						"type": "text",
+						"value": "PHOENIX_DESKTOP"
+					},
+					{
+						"key": "user-agent",
+						"type": "text",
+						"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36"
+					},
+					{
+						"key": "content-type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "origin",
+						"type": "text",
+						"value": "https://www.segundamano.mx"
+					},
+					{
+						"key": "sec-fetch-site",
+						"type": "text",
+						"value": "same-site"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"type": "text",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-dest",
+						"type": "text",
+						"value": "empty"
+					},
+					{
+						"key": "referer",
+						"type": "text",
+						"value": "https://www.segundamano.mx/publicar-anuncio-gratis?from=optout"
+					},
+					{
+						"key": "accept-language",
+						"type": "text",
+						"value": "en,es;q=0.9"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\n      \"ad\": {\n          \"locations\": [{\n              \"code\": \"16\",\n              \"key\": \"region\",\n              \"label\": \"Jalisco\",\n              \"locations\": [{\n                  \"code\": \"647\",\n                  \"key\": \"municipality\",\n                  \"label\": \"Tlajomulco de Zúñiga\",\n                  \"locations\": [{\n                      \"code\": \"48363\",\n                      \"key\": \"area\",\n                      \"label\": \"San Agustin\"\n                  }]\n              }]\n          }],\n          \"subject\": \"Juego de cucharones\",\n          \"body\": \"Juego de cucharones grandes\",\n          \"category\": {\n              \"code\": \"3042\"\n          },\n          \"images\": [],\n          \"price\": {\n              \"currency\": \"mxn\",\n              \"price_value\": 200\n          },\n          \"ad_details\": {},\n          \"phone_hidden\": 1,\n          \"plate\": \"\",\n          \"vin\": \"\",\n          \"type\": {\n              \"code\": \"s\",\n              \"label\": \"\"\n          },\n          \"ad\": \"Juego de cucharones\"\n      },\n      \"category_suggestion\": false,\n      \"commit\": true\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{base_url}}/nga/api/v1.7{{account_id}}/klfst?lang=es\n",
+					"protocol": "https",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"nga",
+						"api",
+						"v1.7{{account_id}}",
+						"klfst"
+					],
+					"query": [
+						{
+							"key": "lang",
+							"value": "es\n"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update phone number",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "85e22d41-e370-432d-bcc6-f9913fcbade6",
+						"exec": [
+							"let getTokenRequest = {",
+							"    method: 'POST',",
+							"    url: 'https://webapi.segundamano.mx/nga/api/v1.1/private/accounts',",
+							"    header: {",
+							"            Authorization: 'Basic ' + pm.environment.get('authString')",
+							"    }",
+							"};",
+							"",
+							"pm.sendRequest(getTokenRequest, (err, response) => {",
+							"    var jsonResponse = response.json(),",
+							"        newAccessToken = jsonResponse.access_token;",
+							"    pm.environment.set('accessToken', newAccessToken);",
+							"    pm.variables.set('accessToken', newAccessToken);",
+							"    console.log({ err, response, newAccessToken })",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d6bff015-84d1-4f31-ad33-34c5c43c62cf",
+						"exec": [
+							"var body = pm.response.json();\rconsole.log(pm.response);\rconsole.log(pm.response.code);\rconsole.log(pm.response.status);\r\rpm.test(\"Validates it has a body\", function () { \r     pm.response.to.be.withBody; \r});\r\rpm.test(\"Validates that the body is json\", function () { \r     pm.response.to.be.json; \r});\r\rpm.test(\"Validates created status\", function(){\r    pm.response.to.have.status(201);\r});\r\rpm.test(\"Validates it has the property action_type\", function() {\r    pm.expect(body.action).to.have.property('action_type');\r    pm.expect(body.action.action_type).to.eq('new');\r});\r\rpm.test(\"Validates subject's value\", function(){\r    pm.expect(body.ad.subject).to.eq('Juego de cucharones');\r});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "accept",
+						"type": "text",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "authorization",
+						"type": "text",
+						"value": "tag:scmcoord.com,2013:api {{accessToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"account\": {\n        \"name\": \"{{userName}}\",\n        \"phone\": \"3345673428\",\n        \"phone_hidden\": true\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{base_url}}/nga/api/v1{{account_id}}\n",
+					"protocol": "https",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"nga",
+						"api",
+						"v1{{account_id}}\n"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
