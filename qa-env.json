@@ -1,5 +1,5 @@
 {
-	"id": "89f6f626-354a-4a02-9655-9935fc77712f",
+	"id": "d57cc667-7a3b-46f9-a474-7f1efe98b1d3",
 	"name": "QA Env",
 	"values": [
 		{
@@ -31,9 +31,19 @@
 			"key": "account_id",
 			"value": "",
 			"enabled": true
+		},
+		{
+			"key": "ad_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "Texto",
+			"value": "",
+			"enabled": true
 		}
 	],
 	"_postman_variable_scope": "environment",
-	"_postman_exported_at": "2020-05-09T04:38:10.788Z",
-	"_postman_exported_using": "Postman/7.23.0"
+	"_postman_exported_at": "2020-05-11T01:52:03.546Z",
+	"_postman_exported_using": "Postman/7.24.0"
 }
