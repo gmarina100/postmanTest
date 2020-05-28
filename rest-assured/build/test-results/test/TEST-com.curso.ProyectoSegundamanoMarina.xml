@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.curso.ProyectoSegundamanoMarina" tests="5" skipped="0" failures="0" errors="0" timestamp="2020-05-28T23:07:12" hostname="Marinas-MacBook-Air.local" time="13.057">
+  <properties/>
+  <testcase name="test1" classname="com.curso.ProyectoSegundamanoMarina" time="3.651"/>
+  <testcase name="test2" classname="com.curso.ProyectoSegundamanoMarina" time="0.915"/>
+  <testcase name="test3" classname="com.curso.ProyectoSegundamanoMarina" time="3.375"/>
+  <testcase name="test4" classname="com.curso.ProyectoSegundamanoMarina" time="4.489"/>
+  <testcase name="test5" classname="com.curso.ProyectoSegundamanoMarina" time="0.627"/>
+  <system-out><![CDATA[Response: {"access_token":"mc1xdaef33e09502b7e1eaad3a78969c3b71680ef864_v2","account":{"account_id":"/private/accounts/10659247","can_publish":false,"email":"ventas_5.131585453409512@ventas.net","locations":[],"name":"ventas_5.131585453409512","phone":"","phone_hidden":false,"professional":false,"rfc":"","uuid":"9e392b7a-c462-4ae5-a6c0-a6c0d72f5b20"},"ad_events":{"24h":{"mails":0,"phone_views":0,"views":0},"7d":{"mails":0,"phone_views":0,"views":0},"total":{"mails":0,"phone_views":0,"views":0}},"token_type":"tag:scmcoord.com,2013:api"}
+Access token = mc1xdaef33e09502b7e1eaad3a78969c3b71680ef864_v2
+Account ID = 10659247
+Request method:	PATCH
+Request URI:	https://webapi.segundamano.mx/nga/api/v1.1/private/accounts/10659247
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Multiparts:		<none>
+Headers:		Authorization=tag:scmcoord.com,2013:api mc1xdaef33e09502b7e1eaad3a78969c3b71680ef864_v2
+				Accept=*/*
+				Content-Type=text/plain; charset=ISO-8859-1
+Cookies:		<none>
+Body:
+{    "account": {        "name": "ventas_5.131585453409512@ventas.net",        "phone": "3345673428",        "phone_hidden": true    }}
+Body test:{"account":{"account_id":"/private/accounts/10659247","can_publish":true,"email":"ventas_5.131585453409512@ventas.net","locations":[],"name":"ventas_5.131585453409512","phone":"3345673428","phone_hidden":true,"professional":false,"rfc":"","uuid":"9e392b7a-c462-4ae5-a6c0-a6c0d72f5b20"}}
+Request method:	POST
+Request URI:	https://webapi.segundamano.mx/nga/api/v1.7/private/accounts/10659247/klfst?lang=es
+Proxy:			<none>
+Request params:	<none>
+Query params:	lang=es
+Form params:	<none>
+Path params:	<none>
+Multiparts:		<none>
+Headers:		Accept=application/json, text/plain, */*
+				x-nga-source=PHOENIX_DESKTOP
+				Authorization=tag:scmcoord.com,2013:api mc1xdaef33e09502b7e1eaad3a78969c3b71680ef864_v2
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Body:
+{
+    "ad": {
+        "locations": [
+            {
+                "code": "16",
+                "key": "region",
+                "label": "Jalisco",
+                "locations": [
+                    {
+                        "code": "647",
+                        "key": "municipality",
+                        "label": "Tlajomulco de Zúñiga",
+                        "locations": [
+                            {
+                                "code": "48363",
+                                "key": "area",
+                                "label": "San Agustin"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "subject": "Juego de cucharones",
+        "body": "Juego de cucharones grandes",
+        "category": {
+            "code": "3042"
+        },
+        "images": [
+            
+        ],
+        "price": {
+            "currency": "MXN",
+            "price_value": 200
+        },
+        "ad_details": {
+            
+        },
+        "phone_hidden": 1,
+        "plate": "",
+        "vin": "",
+        "type": {
+            "code": "s",
+            "label": ""
+        },
+        "ad": "Juego de cucharones"
+    },
+    "category_suggestion": false,
+    "commit": true
+}
+Body test:{"action":{"action_id":"/private/accounts/10659247/ads/67178963/actions/1","action_type":"new"},"ad":{"ad_id":"/private/accounts/10659247/ads/67178963","subject":"Juego de cucharones"}}
+Ad Id 67178963
+Request method:	POST
+Request URI:	https://webapi.segundamano.mx/nga/api/v1.7/private/accounts/10659247/klfst/67178963/actions?lang=es
+Proxy:			<none>
+Request params:	<none>
+Query params:	lang=es
+Form params:	<none>
+Path params:	<none>
+Multiparts:		<none>
+Headers:		Accept=application/json, text/plain, */*
+				x-nga-source=PHOENIX_DESKTOP
+				Authorization=tag:scmcoord.com,2013:api mc1xdaef33e09502b7e1eaad3a78969c3b71680ef864_v2
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Body:
+{
+    "ad": {
+        "locations": [
+            {
+                "code": "16",
+                "key": "region",
+                "label": "Jalisco",
+                "locations": [
+                    {
+                        "code": "647",
+                        "key": "municipality",
+                        "label": "Tlajomulco de Zúñiga",
+                        "locations": [
+                            {
+                                "code": "48363",
+                                "key": "area",
+                                "label": "San Agustin"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "subject": "Juego de cucharones",
+        "body": "Juego de cucharones grandes",
+        "category": {
+            "code": "3042"
+        },
+        "images": [
+            
+        ],
+        "price": {
+            "currency": "MXN",
+            "price_value": 200
+        },
+        "ad_details": {
+            
+        },
+        "phone_hidden": 1,
+        "plate": "",
+        "vin": "",
+        "type": {
+            "code": "s",
+            "label": ""
+        },
+        "ad": "Juego de cucharones"
+    },
+    "category_suggestion": false,
+    "commit": true
+}
+Body test:{"action":{"action_id":"/private/accounts/10659247/ads/67178963/actions/2","action_type":"edit"},"ad":{"ad_id":"/private/accounts/10659247/ads/67178963","subject":"Juego de cucharones"}}
+Ad Id 67178963
+Request method:	DELETE
+Request URI:	https://webapi.segundamano.mx/nga/api/v1/private/accounts/10659247/klfst/67178963?lang=es
+Proxy:			<none>
+Request params:	<none>
+Query params:	lang=es
+Form params:	<none>
+Path params:	<none>
+Multiparts:		<none>
+Headers:		Accept=application/json, text/plain, */*
+				x-nga-source=PHOENIX_DESKTOP
+				Authorization=tag:scmcoord.com,2013:api mc1xdaef33e09502b7e1eaad3a78969c3b71680ef864_v2
+				Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Body:
+{
+    "delete_reason": {
+        "code": "5"
+    }
+}
+Body test:{"error":{"causes":[{"code":"ERROR_AD_ALREADY_DELETED","label":"ERROR_AD_ALREADY_DELETED","object":"query_string"}],"code":"FORBIDDEN"}}
+]]></system-out>
+  <system-err><![CDATA[SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+]]></system-err>
+</testsuite>
